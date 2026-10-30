@@ -1,0 +1,205 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VitalBridge | Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="topbar">
+    <a class="brand" href="/dashboard">
+        <span class="brand-mark small">VB</span>
+        VitalBridge
+    </a>
+
+    <div class="top-actions">
+        <span class="role-pill">{{ role|capitalize }} demo</span>
+        <form action="/logout" method="post">
+            <button class="text-button" type="submit">Log out</button>
+        </form>
+    </div>
+</header>
+
+<main class="page-shell">
+
+    <section class="page-heading">
+        <div>
+            <p class="eyebrow">WELLBEING OVERVIEW</p>
+            <h1>Hello, {{ "Caregiver" if role == "caregiver" else "there" }}</h1>
+            <p class="muted">
+                Latest simulated readings of the individual.
+            </p>
+        </div>
+        <div class="status-chip">
+            <span class="status-dot"></span>
+            Demo system active
+        </div>
+    </section>
+
+    <section class="notice wide-notice">
+        <strong>Important:</strong>
+        All readings are simulated examples.
+        This is not a medical device or emergency service.
+    </section>
+
+    <section class="section-heading">
+        <div>
+            <h2>Health snapshot</h2>
+            <p class="muted">Latest generated sample</p>
+        </div>
+
+        <div class="button-row">
+            <button class="secondary-button" data-scenario="normal">
+                Generate normal
+            </button>
+            <button class="secondary-button" data-scenario="warning">
+                Test warning
+            </button>
+            <button class="primary-button" data-scenario="emergency">
+                Test emergency
+            </button>
+        </div>
+    </section>
+
+    <section class="metrics-grid">
+
+        <article class="metric-card">
+            <div class="metric-label">Heart rate</div>
+            <div class="metric-value">
+                <span id="heart-rate">--</span>
+                <small>bpm</small>
+            </div>
+            <p class="muted">Simulated pulse reading</p>
+        </article>
+
+        <article class="metric-card">
+            <div class="metric-label">Body temperature</div>
+            <div class="metric-value">
+                <span id="temperature">--</span>
+                <small>°C</small>
+            </div>
+            <p class="muted">Simulated temperature</p>
+        </article>
+
+        <article class="metric-card">
+            <div class="metric-label">Blood oxygen (SpO2)</div>
+            <div class="metric-value">
+                <span id="spo2">--</span>
+                <small>%</small>
+            </div>
+            <p class="muted">Simulated oxygen reading</p>
+        </article>
+
+    </section>
+
+    <section class="content-grid">
+
+        <article class="panel current-panel">
+            <div class="panel-heading">
+                <div>
+                    <h2>Current status</h2>
+                    <p class="muted">Based on demo thresholds</p>
+                </div>
+                <span id="level-badge" class="level-badge">
+                    LOADING
+                </span>
+            </div>
+
+            <p id="status-message">
+                Loading sample data...
+            </p>
+
+            <div class="baseline-note">
+                <strong>How this works:</strong>
+                The demo compares generated values with
+                fixed example thresholds.
+            </div>
+        </article>
+
+        <article class="panel profile-panel">
+            <div class="panel-heading">
+                <div>
+                    <h2>Individual profile</h2>
+                    <p class="muted">Sample profile</p>
+                </div>
+            </div>
+
+            <div class="profile-row">
+                <div class="avatar">A</div>
+                <div>
+                    <strong>Alex (sample profile)</strong>
+                    <p class="muted">Demo user · VB-001</p>
+                </div>
+            </div>
+
+            <div class="profile-detail">
+                <span>Emergency contact</span>
+                <strong>Not configured</strong>
+            </div>
+
+            <div class="profile-detail">
+                <span>Location tracking</span>
+                <strong>Not connected</strong>
+            </div>
+
+            <p class="small-note">
+                GPS and wearable connectivity are planned
+                extensions.
+            </p>
+        </article>
+
+    </section>
+
+    <section class="panel alerts-panel">
+
+        <div class="panel-heading">
+            <div>
+                <h2>Recent activity</h2>
+                <p class="muted">Generated readings and alerts</p>
+            </div>
+
+            <span class="muted" id="updated-at">
+                Updating...
+            </span>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Level</th>
+                        <th>Message</th>
+                        <th>Readings</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="alert-list">
+                    <tr>
+                        <td colspan="5">Loading activity...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <footer>
+        VitalBridge prototype · Academic demonstration
+        · Simulated data only
+    </footer>
+
+</main>
+
+<script>
+    window.VITALBRIDGE_ROLE = {{ role|tojson }};
+</script>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+</html>
