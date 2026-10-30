@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VitalBridge | Welcome</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="welcome-page">
+
+<main class="welcome-card">
+    <div class="brand-mark">VB</div>
+
+    <p class="eyebrow">CONNECTED CARE DEMO</p>
+
+    <h1>VitalBridge</h1>
+
+    <p class="intro">
+        A simple wellbeing dashboard designed to help
+        individuals and caregivers stay informed.
+    </p>
+
+    <div class="notice">
+        <strong>Demo notice:</strong>
+        This version uses simulated readings.
+        It is not a medical device and does not contact
+        emergency services.
+    </div>
+
+    <form action="/login" method="post" class="role-form">
+
+        <label for="role">Continue as</label>
+
+        <select name="role" id="role">
+            <option value="caregiver">Caregiver</option>
+            <option value="individual">Individual</option>
+        </select>
+
+        <button class="primary-button" type="submit">
+            Open dashboard
+        </button>
+
+    </form>
+
+    <p class="small-note">
+        No real personal or medical information is
+        required for this demonstration.
+    </p>
+</main>
+
+</body>
+</html>
